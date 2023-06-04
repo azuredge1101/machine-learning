@@ -4,6 +4,9 @@ import pandas as pd
 
 dataset = pd.read_csv('Iris.csv')
 
+#查詢有無缺失資料
+dataset.isna().sum()
+
 X = dataset.iloc[:, 1:5].values
 y = dataset.iloc[:, 5].values
 
