@@ -3,6 +3,9 @@ import pandas as pd
 
 dataset = pd.read_csv('Customers.csv')
 
+#查詢有無缺失資料
+dataset.isna().sum()
+
 x = dataset.iloc[:,[1,2,3,5,6,7]].values
 y = dataset.iloc[:, 4].values
 
