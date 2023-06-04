@@ -4,6 +4,9 @@ import pandas as pd
 
 dataset = pd.read_csv('Social_Network_Ads.csv')
 
+#查詢有無缺失資料
+dataset.isna().sum()
+
 X = dataset.iloc[:, 2:4].values
 y = dataset.iloc[:, 4].values
 
