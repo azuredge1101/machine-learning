@@ -2,7 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
-dataset = pd.read_csv('Downloads\wine.csv')
+dataset = pd.read_csv('wine.csv')
+#查詢有無缺失資料
+dataset.isna().sum()
 
 x = dataset.iloc[:, [4]].values
 y = dataset.iloc[:, [10]].values
