@@ -2,7 +2,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-data = pd.read_csv('Downloads\wine.csv')
+data = pd.read_csv('wine.csv')
+#查詢有無缺失資料
+dataset.isna().sum()
 
 x = data.loc[:, ['fixed acidity','volatile acidity','citric acid','residual sugar','chlorides','free sulfur dioxide','total sulfur dioxide','density','pH','sulphates','alcohol']].values
 y = data.loc[:, ['quality']].values
