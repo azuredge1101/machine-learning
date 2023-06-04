@@ -4,6 +4,9 @@ import pandas as pd
 
 dataset = pd.read_csv('Position_Salaries.csv')
 
+#查詢有無缺失資料
+dataset.isna().sum()
+
 X = dataset.iloc[:, 1:2].values
 y = dataset.iloc[:, 2].values
 
