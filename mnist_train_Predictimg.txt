@@ -1,0 +1,39 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+dataset = pd.read_csv('mnist_train.csv')
+
+X = dataset.iloc[:, 1:].values
+y = dataset.iloc[:, 0].values
+
+show_img = np.reshape(X[101, :], (28, 28))
+plt.matshow(show_img, cmap = plt.get_cmap("gray"))
+plt.show()
+
+X[X>0] = 1
+
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.5, random_state = 0 )
+
+from sklearn.svm import SVC
+
+classifier = SVC(kernel = "rbf", random_state = 0)
+classifier.fit(X_train, y_train)
+
+y_pred = classifier.predict(X_test)
+
+from sklearn.metrics import confusion_matrix
+
+cm = confusion_matrix(y_test, y_pred)
+
+import matplotlib.image as mpimg
+
+img=mpimg.imread('9.png')
+img=img[:,:,2]
+plt.matshow(img, cmap = plt.get_cmap('gray'))
+plt.show()
+test_img = img.reshape((1,784))
+
+img_class = classifier.predict(test_img)

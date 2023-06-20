@@ -1,0 +1,49 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+dataset = pd.read_csv('Salary_Data.csv')
+
+x = dataset.iloc[:, :-1].values
+y = dataset.iloc[:, 1].values
+
+from sklearn.model_selection import train_test_split
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 0 )
+
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(x_train, y_train)
+
+y_pred = regressor.predict(x_test)
+
+plt.scatter(x_train, y_train, color = 'red')
+plt.plot(x_train, regressor.predict(x_train), color = 'blue')
+plt.title('Salary VS Experience (training set)')
+plt.xlabel('Years of Experience')
+plt.ylabel('Salary')
+plt.show()
+
+plt.scatter(x_test, y_test, color = 'red')
+plt.plot(x_train, regressor.predict(x_train), color = 'blue')
+plt.title('Salary VS Experience (test set)')
+plt.xlabel('Years of Experience')
+plt.ylabel('Salary')
+plt.show()
+
+
+residuals = y_test - y_pred #計算殘差
+
+import seaborn as sns
+
+sns.residplot(x_test.flatten(), residuals.flatten(), lowess=True, color="g")
+plt.xlabel("x")
+plt.ylabel("Residuals")
+plt.title("Residual Plot")
+
+residuals_mean = np.mean(residuals)
+residuals_std = np.std(residuals)
+residuals_median = np.median(residuals)
+
+from scipy.stats import shapiro
+_, p_value = shapiro(residuals)
+print("Shapiro-Wilk normality test p-value", p_value)
